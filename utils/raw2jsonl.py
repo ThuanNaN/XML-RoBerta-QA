@@ -22,8 +22,8 @@ if __name__ == "__main__":
             record = {
                 'question': question,
                 'context': context,
-                'short_candanidate_start': -1,
-                'short_candidate': ''
+                'answer_start_idx': -1,
+                'answer_text': ''
             }
             records.append(record)
 
@@ -31,8 +31,8 @@ if __name__ == "__main__":
             record = {
                 'question': question,
                 'context': context,
-                'short_candidate_start': sample['short_candidate_start'],
-                'short_candidate': sample['short_candidate']
+                'answer_start_idx': sample['short_candidate_start'],
+                'answer_text': sample['short_candidate']
             } 
 
             records.append(record)
