@@ -5,9 +5,18 @@ from utils import data_loader
 import numpy as np
 from datasets import load_metric
 import os
+import argparse
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--epochs', type=int, default=10)
+    parser.add_argument('--learning-rate', type=float, default=1e-4, help='Learning rate')
+    parser.add_argument('--batch-size', type=int, default=8, help='Batch size training')
+    parser.add_argument('--fp16', action='store_true', help='FP16 half-precision training')
+
+    opt = parser.parse_args()
+
     # tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
     model = MRCQuestionAnswering.from_pretrained("xlm-roberta-base",
                                                  cache_dir='./model-bin/cache',
@@ -24,12 +33,13 @@ if __name__ == "__main__":
     training_args = TrainingArguments("model-bin/test",
                                       do_train=True,
                                       do_eval=True,
-                                      num_train_epochs=10,
-                                      learning_rate=1e-4,
+                                      num_train_epochs=opt.epochs,
+                                      learning_rate=opt.learning_rate,
                                       warmup_ratio=0.05,
                                       weight_decay=0.01,
-                                      per_device_train_batch_size=1,
-                                      per_device_eval_batch_size=1,
+                                      per_device_train_batch_size=opt.batch_size,
+                                      per_device_eval_batch_size=opt.batch_size,
+                                      fp16=opt.fp16,
                                       gradient_accumulation_steps=1,
                                       logging_dir='./log',
                                       logging_steps=5,
