@@ -4,7 +4,6 @@ from torch.utils.data import DataLoader
 import torch
 import numpy as np
 from nltk import word_tokenize
-import tqdm as tqdm
 
 tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base",
                                           cache_dir='./model-bin/cache',
@@ -163,17 +162,17 @@ def get_dataloader(train_path, valid_path, batch_size=2, num_proc=10):
 
     print("Train set: ", len(train_set))
     print("Valid set: ", len(valid_set))
-    # return train_set, valid_set
+    return train_set, valid_set
     #return train_set, valid_set.shard(500, 0)
     #
-    train_dataloader = DataLoader(
-        train_set, shuffle=True, batch_size=batch_size, collate_fn=data_collator
-    )
-    valid_dataloader = DataLoader(
-        valid_set, batch_size=batch_size, collate_fn=data_collator
-    )
-    
-    return train_dataloader, valid_dataloader
+    # train_dataloader = DataLoader(
+    #     train_set, shuffle=True, batch_size=batch_size, collate_fn=data_collator
+    # )
+    # valid_dataloader = DataLoader(
+    #     valid_set, batch_size=batch_size, collate_fn=data_collator
+    # )
+    #
+    # return train_dataloader, valid_dataloader
 
 
 def build_target_dictionary():

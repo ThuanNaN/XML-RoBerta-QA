@@ -24,8 +24,8 @@ if __name__ == "__main__":
     valid_set = []
     for part in glob.glob('data-bin/unify/*.jsonl'):
         dataset = datasets.load_dataset('json', data_files=[part])['train']
-        dataset.filter(assert_sample)
-        dataset = dataset.map(format_sample)
+        # dataset.filter(assert_sample)
+        # dataset = dataset.map(format_sample)
 
         all_data = dataset.train_test_split(test_size=0.1)
         train = all_data['train']
