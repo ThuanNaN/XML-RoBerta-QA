@@ -6,6 +6,7 @@ import numpy as np
 from datasets import load_metric
 import os
 import argparse
+import tqdm as tqdm
 
 
 if __name__ == "__main__":
@@ -14,7 +15,7 @@ if __name__ == "__main__":
     parser.add_argument('--learning-rate', type=float, default=1e-4, help='Learning rate')
     parser.add_argument('--batch-size', type=int, default=8, help='Batch size training')
     parser.add_argument('--fp16', action='store_true', help='FP16 half-precision training')
-
+    parser.add_argument('--fp16-opt-level', type=str, default="01", help='apex AMP optimization level selected in ["00", "01","02", "03" ]')
     opt = parser.parse_args()
 
     # tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
@@ -40,6 +41,7 @@ if __name__ == "__main__":
                                       per_device_train_batch_size=opt.batch_size,
                                       per_device_eval_batch_size=opt.batch_size,
                                       fp16=opt.fp16,
+                                      fp16_opt_level = opt.fp16_opt_level,
                                       gradient_accumulation_steps=1,
                                       logging_dir='./log',
                                       logging_steps=5,

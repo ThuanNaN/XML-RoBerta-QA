@@ -196,12 +196,12 @@ if __name__ == "__main__":
         train_path='../data-bin/processed/train.dataset',
         valid_path='../data-bin/processed/valid.dataset'
     )
-    from tqdm import tqdm
+    # from tqdm import tqdm
 
-    for batch in tqdm(train_dataset):
-        pass
+    # for batch in tqdm(train_dataset):
+    #     pass
         # print(batch['tgt_words_ids'].shape)
 
-    for batch in tqdm(valid_dataset):
-        pass
+    # for batch in tqdm(valid_dataset):
+    #     pass
         # print(batch['tgt_words_ids'].shape)
