@@ -153,10 +153,9 @@ def get_dataloader(train_path, valid_path, batch_size=2, num_proc=10):
     print("Train set: ", len(train_set))
     print("Valid set: ", len(valid_set))
     # unique_tags = set(tag for doc in tags for tag in train_set)
-    train_set = train_set.shuffle().map(tokenize_function, batched=False, num_proc=num_proc).filter(
-        lambda example: example['valid'], num_proc=num_proc)
-    valid_set = valid_set.map(tokenize_function, batched=False, num_proc=num_proc).filter(
-        lambda example: example['valid'], num_proc=num_proc)
+    train_set = train_set.shuffle().map(tokenize_function, batched=False, num_proc=num_proc)
+
+    valid_set = valid_set.map(tokenize_function, batched=False, num_proc=num_proc)
     # train_set = train_set.sort('src_ids_len')
     # valid_set = valid_set.sort('src_ids_len')
 
@@ -193,9 +192,10 @@ def build_target_dictionary():
 if __name__ == "__main__":
 
     train_dataset, valid_dataset = get_dataloader(
-        train_path='../data-bin/processed/train.dataset',
-        valid_path='../data-bin/processed/valid.dataset'
+        train_path='data-bin/processed/train.dataset',
+        valid_path='data-bin/processed/valid.dataset'
     )
+
     # from tqdm import tqdm
 
     # for batch in tqdm(train_dataset):
