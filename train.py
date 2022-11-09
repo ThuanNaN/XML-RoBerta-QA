@@ -14,7 +14,6 @@ if __name__ == "__main__":
     parser.add_argument('--fp16-opt-level', type=str, default="01", help='apex AMP optimization level selected in ["00", "01","02", "03" ]')
     opt = parser.parse_args()
 
-    # tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
     model = MRCQuestionAnswering.from_pretrained("xlm-roberta-base",
                                                  cache_dir='./model-bin/cache',
                                                  #local_files_only=True
@@ -26,6 +25,7 @@ if __name__ == "__main__":
         train_path='./data-bin/processed/train.dataset',
         valid_path='./data-bin/processed/valid.dataset'
     )
+
 
     training_args = TrainingArguments("model-bin/test",
                                       do_train=True,

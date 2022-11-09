@@ -5,7 +5,7 @@ import torch
 import numpy as np
 from nltk import word_tokenize
 
-tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base",
+tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-large",
                                           cache_dir='./model-bin/cache',
                                           #local_files_only=True
                                          )
@@ -84,11 +84,13 @@ def data_collator(samples):
     attention_mask = torch.zeros_like(input_ids)
     for i in range(len(samples)):
         attention_mask[i][:len(samples[i]['input_ids'])] = 1
+    
+
     words_lengths = collate_tokens([torch.tensor(item['words_lengths']) for item in samples], pad_idx=0)
     answer_start = collate_tokens([torch.tensor([item['start_idx']]) for item in samples], pad_idx=0)
     answer_end = collate_tokens([torch.tensor([item['end_idx']]) for item in samples], pad_idx=0)
-    span_answer_ids = collate_tokens([torch.tensor(item['span_answer_ids']) for item in samples],
-                                     pad_idx=-100)
+    span_answer_ids = collate_tokens([torch.tensor(item['span_answer_ids']) for item in samples], pad_idx=-100)
+
 
     batch_samples = {
         'input_ids': input_ids,

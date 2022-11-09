@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 from torch.nn import CrossEntropyLoss
 
-_CHECKPOINT_FOR_DOC = "roberta-base"
+_CHECKPOINT_FOR_DOC = "roberta-large"
 _CONFIG_FOR_DOC = "RobertaConfig"
 _TOKENIZER_FOR_DOC = "RobertaTokenizer"
 
