@@ -5,7 +5,7 @@ import torch
 import numpy as np
 from nltk import word_tokenize
 
-tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-large",
+tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base",
                                           cache_dir='./model-bin/cache',
                                           #local_files_only=True
                                          )

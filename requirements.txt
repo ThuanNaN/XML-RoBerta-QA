@@ -3,3 +3,5 @@ transformers
 pandas
 numpy
 tqdm
+torch==1.12.1
+cudatoolkit=11.3
